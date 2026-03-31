@@ -80,6 +80,8 @@
     endif
     assign sameAs_array = sameAs_links | split: '|'
   -%}
+  {%- assign search_placeholder = '{' | append: 'search_term_string}' -%}
+  {%- assign search_action_url = shop.url | append: '/search?q=' | append: search_placeholder -%}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -90,7 +92,7 @@
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": {{ shop.url | append: '/search?q={search_term_string}' | json }}
+        "urlTemplate": {{ search_action_url | json }}
       },
       "query-input": "required name=search_term_string"
     }
