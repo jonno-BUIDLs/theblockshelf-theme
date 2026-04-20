@@ -8,6 +8,53 @@
     "theme_support_url": "https://haloroar.ticksy.com"
   },
   {
+    "name": "Blockshelf — Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand type + colour"
+      },
+      {
+        "type": "checkbox",
+        "id": "blockshelf_use_brand_fonts",
+        "label": "Use Blockshelf brand fonts",
+        "info": "Loads Clash Display, Satoshi and JetBrains Mono from Fontshare and overrides the Shopify font picker above. Turn off to respect the font picker.",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "blockshelf_accent_palette",
+        "label": "Accent palette",
+        "info": "Second accent colour used on hero highlights, card hovers, FAQ plus icons, and link underlines. Bitcoin orange is always the primary.",
+        "options": [
+          { "value": "violet", "label": "Violet" },
+          { "value": "cyan",   "label": "Cyan"   },
+          { "value": "lime",   "label": "Lime"   }
+        ],
+        "default": "violet"
+      },
+      {
+        "type": "header",
+        "content": "Sale lockup"
+      },
+      {
+        "type": "select",
+        "id": "blockshelf_sale_style",
+        "label": "Sale badge style",
+        "info": "Controls how sale-price products render across the store (featured product, product cards, PDP).",
+        "options": [
+          { "value": "default", "label": "Default — wobble tag" },
+          { "value": "stamp",   "label": "Stamp — rotating circular" },
+          { "value": "neon",    "label": "Neon — glowing flicker" },
+          { "value": "banner",  "label": "Banner — stacked" },
+          { "value": "strike",  "label": "Strike only — no badge" },
+          { "value": "none",    "label": "Off — use Harmony default" }
+        ],
+        "default": "default"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
