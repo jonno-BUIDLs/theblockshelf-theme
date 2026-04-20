@@ -50,12 +50,6 @@
             "show_back_in_stock_phone": false
           }
         },
-        "reassurance": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'blockshelf-reassurance' %}"
-          }
-        },
         "pickup_availability": {
           "type": "pickup_availability",
           "settings": {}
@@ -82,7 +76,6 @@
         "description_teaser",
         "variant_picker",
         "buy_buttons",
-        "reassurance",
         "pickup_availability",
         "share",
         "sticky_buy_button"
