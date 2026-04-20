@@ -1,0 +1,39 @@
+{%- comment -%}
+  Renders the redesigned sale-price lockup for The Blockshelf.
+  Drop-in replacement for the on-sale branch of snippets/product-price.liquid.
+
+  Accepts:
+  - target: {Object} product or variant — whichever has .price + .compare_at_price
+  - price: {Number} current price in cents
+  - compare_at_price: {Number} compare-at price in cents
+{%- endcomment -%}
+
+{%- liquid
+  assign save_amount = compare_at_price | minus: price
+  assign save_percent = save_amount | times: 100.0 | divided_by: compare_at_price | round
+-%}
+
+<span class="bs-sale-lockup">
+  <span class="bs-sale-lockup__now">
+    {%- if settings.currency_code_enabled -%}
+      {{- price | money_with_currency -}}
+    {%- else -%}
+      {{- price | money -}}
+    {%- endif -%}
+  </span>
+
+  <span class="bs-sale-lockup__was">
+    <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+    {%- if settings.currency_code_enabled -%}
+      {{- compare_at_price | money_with_currency -}}
+    {%- else -%}
+      {{- compare_at_price | money -}}
+    {%- endif -%}
+  </span>
+
+  {%- if save_percent > 0 -%}
+    <span class="bs-sale-lockup__save">Save {{ save_percent }}%</span>
+  {%- endif -%}
+
+  <span class="bs-sale-badge" aria-hidden="true">SALE</span>
+</span>

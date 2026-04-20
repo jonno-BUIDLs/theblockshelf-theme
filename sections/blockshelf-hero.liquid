@@ -1,0 +1,153 @@
+{%- liquid
+  assign heading      = section.settings.heading
+  assign accent_word  = section.settings.accent_word
+  assign eyebrow      = section.settings.eyebrow
+  assign kicker       = section.settings.kicker
+  assign cta_label    = section.settings.cta_label
+  assign cta_link     = section.settings.cta_link
+  assign mascot_image = section.settings.mascot_image
+  assign ticker_text  = section.settings.ticker_text
+
+  comment
+    Highlight the accent word in the heading with <span class="bs-accent">.
+    If the word appears verbatim, we inject the span; otherwise we render as-is.
+  endcomment
+
+  assign heading_rendered = heading
+  if accent_word != blank
+    assign accent_html = '<span class="bs-accent">' | append: accent_word | append: '</span>'
+    assign heading_rendered = heading | replace: accent_word, accent_html
+  endif
+-%}
+
+<section
+  class="bs-hero"
+  data-section-id="{{ section.id }}"
+  data-bs-reveal-root
+>
+  <div class="bs-hero__inner">
+    <div class="bs-hero__content">
+      {%- if eyebrow != blank -%}
+        <div class="bs-hero__eyebrow">{{ eyebrow | escape }}</div>
+      {%- endif -%}
+
+      {%- if request.page_type == 'index' -%}
+        <h1 class="bs-hero__headline">{{ heading_rendered }}</h1>
+      {%- else -%}
+        <h2 class="bs-hero__headline">{{ heading_rendered }}</h2>
+      {%- endif -%}
+
+      {%- if kicker != blank -%}
+        <p class="bs-hero__kicker">{{ kicker }}</p>
+      {%- endif -%}
+
+      {%- if cta_label != blank -%}
+        <a class="bs-hero__cta" href="{{ cta_link | default: '#' }}">
+          {{ cta_label | escape }}
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      {%- if ticker_text != blank -%}
+        <div class="bs-hero__ticker">
+          <span class="dot"></span>{{ ticker_text | escape }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if mascot_image != blank -%}
+      <div class="bs-hero__mascot">
+        {{ mascot_image | image_url: width: 900 | image_tag:
+             loading: 'eager',
+             fetchpriority: 'high',
+             widths: '420, 620, 900',
+             sizes: '(min-width: 900px) 40vw, 80vw',
+             alt: mascot_image.alt | default: 'The Blockshelf mascot' }}
+      </div>
+    {%- else -%}
+      <div class="bs-hero__mascot" aria-hidden="true">
+        <div style="color:var(--bs-muted);font-family:var(--bs-font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;">Add mascot image</div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function() {
+    var root = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!root || !('IntersectionObserver' in window)) {
+      if (root) root.classList.add('is-in');
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.2 });
+    io.observe(root);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Blockshelf hero",
+  "tag": "section",
+  "class": "shopify-section-blockshelf-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "SS26 · STACK SATS. WEAR THE HAT."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Headline",
+      "default": "WHAT'S NEW ON THE BLOCKSHELF?"
+    },
+    {
+      "type": "text",
+      "id": "accent_word",
+      "label": "Accent word (coloured in headline)",
+      "info": "Must match a word or phrase in the headline exactly.",
+      "default": "BLOCKSHELF"
+    },
+    {
+      "type": "textarea",
+      "id": "kicker",
+      "label": "Sub-headline",
+      "default": "Bitcoin-native merch for degens who don't do fast fashion rugs. Clean drip, a kids book that slaps, and shoes that HODL."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop the drop"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "image_picker",
+      "id": "mascot_image",
+      "label": "Mascot / hero image"
+    },
+    {
+      "type": "text",
+      "id": "ticker_text",
+      "label": "Ticker line",
+      "default": "LIVE · PRINTED ON DEMAND · SHIPS FROM AUSTRALIA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blockshelf hero"
+    }
+  ]
+}
+{% endschema %}

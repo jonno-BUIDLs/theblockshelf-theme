@@ -1,0 +1,311 @@
+{%- comment -%}
+  The Blockshelf — Collection banner (Option C: split mini-hero)
+  Replaces Harmony's main-collection-banner for collection pages.
+
+  Renders:
+  - Breadcrumb (Home / Shop / {collection title})
+  - Big Clash Display collection title with accent word
+  - Collection description (from collection.description or collection metafield)
+  - 3 stat cells (Products, Minted on Demand, Est. dispatch)
+  - Right-side collage of up to 3 product images from the collection
+  - "Minted on demand" rotated sticker over the collage
+
+  Settings:
+  - accent_word: {String} The last word of the collection title that gets the violet accent color. Auto-detected by default (last word).
+  - dispatch_days: {String} Shown in stats ("3 days").
+  - show_sticker: {Boolean} Show the "Minted on demand" rotated sticker.
+  - sticker_text: {String} Override sticker copy.
+  - image_1, image_2, image_3: {Image_picker} Optional overrides. Defaults to first 3 products of the collection.
+{%- endcomment -%}
+
+{%- liquid
+  assign coll_title = collection.title | default: 'All products'
+  assign last_space = coll_title | split: ' ' | size | minus: 1
+  assign title_parts = coll_title | split: ' '
+  if title_parts.size > 1
+    assign accent_word = title_parts[last_space]
+    assign head_words = ''
+    for w in title_parts
+      if forloop.index0 < last_space
+        assign head_words = head_words | append: w | append: ' '
+      endif
+    endfor
+    assign head_words = head_words | strip
+  else
+    assign head_words = ''
+    assign accent_word = coll_title
+  endif
+
+  if section.settings.accent_word != blank
+    assign accent_word = section.settings.accent_word
+    assign head_words = coll_title | remove: accent_word | strip
+  endif
+
+  assign products_count = collection.products_count | default: collection.all_products_count
+  assign dispatch = section.settings.dispatch_days | default: '3 days'
+  assign sticker = section.settings.sticker_text | default: 'minted on demand'
+
+  assign tile_1 = section.settings.image_1
+  assign tile_2 = section.settings.image_2
+  assign tile_3 = section.settings.image_3
+-%}
+
+<section class="bs-collection-banner"
+         data-section-id="{{ section.id }}"
+         style="
+           --bs-pad-top: {{ section.settings.padding_top }}px;
+           --bs-pad-bottom: {{ section.settings.padding_bottom }}px;
+         ">
+  <div class="bs-collection-banner__inner">
+
+    {%- comment -%} LEFT — copy + stats {%- endcomment -%}
+    <div class="bs-collection-banner__left">
+      <div>
+        {%- if section.settings.show_breadcrumb -%}
+          <nav class="bs-crumb" aria-label="{{ 'general.breadcrumb.title' | t | default: 'Breadcrumb' | escape }}">
+            <a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t | default: 'Home' }}</a>
+            <span class="bs-crumb__sep">/</span>
+            <a href="{{ routes.collections_url | default: '/collections' }}">{{ 'general.breadcrumb.shop' | t | default: 'Shop' }}</a>
+            <span class="bs-crumb__sep">/</span>
+            <span class="bs-crumb__here">{{ coll_title | escape }}</span>
+          </nav>
+        {%- endif -%}
+
+        <h1 class="bs-collection-banner__title">
+          {%- if head_words != blank -%}
+            {{ head_words | escape }}
+            <em>{{ accent_word | escape }}</em>
+          {%- else -%}
+            <em>{{ accent_word | escape }}</em>
+          {%- endif -%}
+        </h1>
+
+        {%- if collection.description != blank -%}
+          <div class="bs-collection-banner__desc rte">{{ collection.description }}</div>
+        {%- elsif section.settings.fallback_description != blank -%}
+          <div class="bs-collection-banner__desc">{{ section.settings.fallback_description }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="bs-collection-banner__stats">
+        <div class="bs-stat">
+          <div class="bs-stat__label">{{ section.settings.stat_1_label | default: 'Products' }}</div>
+          <div class="bs-stat__val">{{ products_count }}</div>
+        </div>
+        <div class="bs-stat">
+          <div class="bs-stat__label">{{ section.settings.stat_2_label | default: 'Minted on' }}</div>
+          <div class="bs-stat__val">{{ section.settings.stat_2_value | default: 'Demand' }}</div>
+        </div>
+        <div class="bs-stat">
+          <div class="bs-stat__label">{{ section.settings.stat_3_label | default: 'Est. dispatch' }}</div>
+          <div class="bs-stat__val">{{ dispatch }}</div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} RIGHT — product collage {%- endcomment -%}
+    <div class="bs-collection-banner__right">
+      {%- if section.settings.show_sticker -%}
+        <div class="bs-sticker" aria-hidden="true">{{ sticker }}</div>
+      {%- endif -%}
+
+      <div class="bs-collage" aria-hidden="true">
+        {%- comment -%} Tile 1 — tall left {%- endcomment -%}
+        <div class="bs-collage__tile bs-collage__tile--1">
+          {%- if tile_1 != blank -%}
+            {{ tile_1 | image_url: width: 800 | image_tag:
+              loading: 'eager',
+              widths: '400,600,800,1000',
+              sizes: '(min-width: 900px) 25vw, 50vw',
+              alt: tile_1.alt | default: coll_title | escape
+            }}
+          {%- elsif collection.products[0].featured_media -%}
+            {{ collection.products[0].featured_media | image_url: width: 800 | image_tag:
+              loading: 'eager',
+              widths: '400,600,800,1000',
+              sizes: '(min-width: 900px) 25vw, 50vw',
+              alt: collection.products[0].title | escape
+            }}
+          {%- else -%}
+            <span class="bs-collage__holder">IMG 1 · 1:2</span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Tile 2 — top right {%- endcomment -%}
+        <div class="bs-collage__tile bs-collage__tile--2">
+          {%- if tile_2 != blank -%}
+            {{ tile_2 | image_url: width: 600 | image_tag:
+              loading: 'eager',
+              widths: '300,450,600,900',
+              sizes: '(min-width: 900px) 18vw, 50vw',
+              alt: tile_2.alt | default: coll_title | escape
+            }}
+          {%- elsif collection.products[1].featured_media -%}
+            {{ collection.products[1].featured_media | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              widths: '300,450,600,900',
+              sizes: '(min-width: 900px) 18vw, 50vw',
+              alt: collection.products[1].title | escape
+            }}
+          {%- else -%}
+            <span class="bs-collage__holder">IMG 2 · 1:1</span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Tile 3 — bottom right {%- endcomment -%}
+        <div class="bs-collage__tile bs-collage__tile--3">
+          {%- if tile_3 != blank -%}
+            {{ tile_3 | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              widths: '300,450,600,900',
+              sizes: '(min-width: 900px) 18vw, 50vw',
+              alt: tile_3.alt | default: coll_title | escape
+            }}
+          {%- elsif collection.products[2].featured_media -%}
+            {{ collection.products[2].featured_media | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              widths: '300,450,600,900',
+              sizes: '(min-width: 900px) 18vw, 50vw',
+              alt: collection.products[2].title | escape
+            }}
+          {%- else -%}
+            <span class="bs-collage__holder">IMG 3 · 1:1</span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blockshelf · Collection banner",
+  "tag": "section",
+  "class": "bs-section bs-section--collection-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "accent_word",
+      "label": "Accent word override",
+      "info": "The word rendered in violet. Leave blank to auto-accent the last word of the collection title."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show breadcrumb",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "info": "Shown if the collection has no description set."
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Minted on"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 value",
+      "default": "Demand"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Est. dispatch"
+    },
+    {
+      "type": "text",
+      "id": "dispatch_days",
+      "label": "Dispatch time",
+      "default": "3 days"
+    },
+    {
+      "type": "header",
+      "content": "Collage"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticker",
+      "label": "Show \"minted on demand\" sticker",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticker_text",
+      "label": "Sticker text",
+      "default": "minted on demand"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Tile 1 (tall, left)",
+      "info": "Defaults to the first product's featured image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Tile 2 (top right)",
+      "info": "Defaults to the second product's featured image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Tile 3 (bottom right)",
+      "info": "Defaults to the third product's featured image."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 96,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blockshelf · Collection banner",
+      "category": "Blockshelf"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["collection"]
+  }
+}
+{% endschema %}

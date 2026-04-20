@@ -1,0 +1,36 @@
+{%- comment -%}
+  blockshelf-reassurance.liquid
+  -----------------------------
+  3-up reassurance strip that sits inside the PDP buy column, below the
+  express checkout buttons. Brand messaging: minted on demand · ships in X
+  days · studio location.
+
+  Merchant-editable via shop metafields or fallbacks below.
+
+  Usage:
+    {% render 'blockshelf-reassurance' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign r1_label = shop.metafields.blockshelf.reassure_1_label | default: 'Minted on'
+  assign r1_value = shop.metafields.blockshelf.reassure_1_value | default: 'Demand'
+  assign r2_label = shop.metafields.blockshelf.reassure_2_label | default: 'Ships in'
+  assign r2_value = shop.metafields.blockshelf.reassure_2_value | default: '3 days'
+  assign r3_label = shop.metafields.blockshelf.reassure_3_label | default: 'Studio'
+  assign r3_value = shop.metafields.blockshelf.reassure_3_value | default: 'Sydney, AU'
+-%}
+
+<div class="bs-reassure" role="list">
+  <div class="bs-reassure__item" role="listitem">
+    <span class="bs-reassure__label">{{ r1_label }}</span>
+    <span class="bs-reassure__value">{{ r1_value }}</span>
+  </div>
+  <div class="bs-reassure__item" role="listitem">
+    <span class="bs-reassure__label">{{ r2_label }}</span>
+    <span class="bs-reassure__value">{{ r2_value }}</span>
+  </div>
+  <div class="bs-reassure__item" role="listitem">
+    <span class="bs-reassure__label">{{ r3_label }}</span>
+    <span class="bs-reassure__value">{{ r3_value }}</span>
+  </div>
+</div>

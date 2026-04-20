@@ -1,0 +1,72 @@
+{%- comment -%}
+  blockshelf-sticky-buy.liquid
+  ----------------------------
+  Sticky buy bar that slides up from the bottom once the main buy box scrolls
+  out of view. Marketing + consumer logic: every scroll without the CTA in view
+  is a lost-sale risk on long PDPs.
+
+  Usage — inside a product page context (expects `product` var):
+    {% render 'blockshelf-sticky-buy', product: product %}
+
+  Requires: assets/blockshelf-pdp.js (registers the IntersectionObserver that
+  toggles `.bs-sticky-buy.is-visible`).
+{%- endcomment -%}
+
+{%- liquid
+  assign _v = product.selected_or_first_available_variant
+  assign _img = _v.featured_media.preview_image | default: product.featured_media.preview_image
+  assign _on_sale = false
+  if _v.compare_at_price > _v.price
+    assign _on_sale = true
+  endif
+-%}
+
+<aside class="bs-sticky-buy" data-bs-sticky-buy aria-hidden="true">
+  <div class="bs-sticky-buy__inner">
+    <a href="{{ product.url }}" class="bs-sticky-buy__thumb" aria-hidden="true" tabindex="-1">
+      {%- if _img -%}
+        {{ _img | image_url: width: 120 | image_tag:
+             loading: 'lazy',
+             widths: '60,120,180',
+             sizes:  '60px',
+             alt:    ''
+        }}
+      {%- endif -%}
+    </a>
+
+    <div class="bs-sticky-buy__info">
+      <p class="bs-sticky-buy__title">{{ product.title | escape }}</p>
+      <p class="bs-sticky-buy__meta">
+        {%- for opt in _v.options -%}
+          {{ opt }}{%- unless forloop.last %} · {% endunless -%}
+        {%- endfor -%}
+      </p>
+    </div>
+
+    <div class="bs-sticky-buy__price">
+      {%- if _on_sale -%}
+        <span class="bs-sticky-buy__was">{{ _v.compare_at_price | money }}</span>
+      {%- endif -%}
+      <span class="bs-sticky-buy__now{% if _on_sale %} is-sale{% endif %}">
+        {{ _v.price | money }}
+      </span>
+    </div>
+
+    <form method="post" action="/cart/add" enctype="multipart/form-data"
+          class="bs-sticky-buy__form" data-bs-sticky-buy-form>
+      <input type="hidden" name="id" value="{{ _v.id }}" data-bs-sticky-buy-id />
+      <input type="hidden" name="quantity" value="1" />
+      <button type="submit" class="bs-sticky-buy__cta" data-bs-stack-trigger
+              {% unless _v.available %}disabled{% endunless %}>
+        {%- if _v.available -%}
+          Add to cart
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+          </svg>
+        {%- else -%}
+          Sold out
+        {%- endif -%}
+      </button>
+    </form>
+  </div>
+</aside>

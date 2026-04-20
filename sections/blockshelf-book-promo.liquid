@@ -1,0 +1,161 @@
+{%- comment -%}
+  blockshelf-book-promo.liquid
+  -----------------------------
+  "Pairs with Bitcoin Minors" promo block for PDPs. Editorial split layout —
+  copy on the left, book artwork on the right.
+
+  Merchant-editable: product handle, heading, accent word, body, CTA label,
+  artwork image override.
+{%- endcomment -%}
+
+{%- liquid
+  assign book = all_products[section.settings.book_handle]
+  assign has_book = false
+  if book != blank and book.handle != ''
+    assign has_book = true
+  endif
+
+  assign book_url   = section.settings.cta_link | default: book.url | default: '/products/bitcoin-minors-and-degen-descendants'
+  assign book_img   = section.settings.artwork | default: book.featured_media.preview_image
+  assign cta_label  = section.settings.cta_label | default: 'Shop the book'
+-%}
+
+<section class="bs-book-promo bs-section bs-reveal"
+         style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="bs-section-container">
+    <div class="bs-book-promo__card">
+      <div class="bs-book-promo__text">
+        <p class="bs-book-promo__eyebrow">
+          <span aria-hidden="true"></span>
+          {{ section.settings.eyebrow | default: 'Pairs with' }}
+        </p>
+        <h2 class="bs-book-promo__heading">
+          {{ section.settings.heading_pre | default: 'Bitcoin' }}
+          <em>{{ section.settings.heading_accent | default: 'Minors' }}</em>
+        </h2>
+        <div class="bs-book-promo__body rte">
+          {{ section.settings.body | default: '<p>The book that started it all. A kids’ intro to Bitcoin that slaps. Buy it alongside your order and save 15% on the bundle.</p>' }}
+        </div>
+        <a href="{{ book_url }}" class="bs-book-promo__cta">
+          {{ cta_label }}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="bs-book-promo__art">
+        {%- if book_img -%}
+          {{ book_img | image_url: width: 800 | image_tag:
+               loading: 'lazy',
+               widths: '300,600,800,1200',
+               sizes:  '(min-width: 750px) 50vw, 100vw',
+               alt:    book.title | default: 'Bitcoin Minors',
+               class:  'bs-book-promo__img'
+          }}
+        {%- else -%}
+          {%- comment -%} Placeholder book artwork (matches mockup) {%- endcomment -%}
+          <div class="bs-book-promo__placeholder" aria-hidden="true">
+            <span class="bs-book-promo__placeholder-sm">A kids&rsquo; guide to</span>
+            <span class="bs-book-promo__placeholder-lg">Bitcoin<br/>Minors</span>
+            <span class="bs-book-promo__placeholder-sm">by Jonno &middot;<br/>The Blockshelf</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blockshelf — Book promo",
+  "class": "shopify-section--bs-book-promo",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Book source"
+    },
+    {
+      "type": "product",
+      "id": "book_product",
+      "label": "Book product (optional)",
+      "info": "Links + artwork auto-populate from this product. Or hard-code below."
+    },
+    {
+      "type": "text",
+      "id": "book_handle",
+      "label": "Product handle fallback",
+      "default": "bitcoin-minors"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Pairs with"
+    },
+    {
+      "type": "text",
+      "id": "heading_pre",
+      "label": "Heading — main",
+      "default": "Bitcoin"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading — accent word",
+      "default": "Minors"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>The book that started it all. A kids’ intro to Bitcoin that slaps. Buy it alongside your order and save 15% on the bundle.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop the book"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link (optional override)"
+    },
+    {
+      "type": "header",
+      "content": "Artwork"
+    },
+    {
+      "type": "image_picker",
+      "id": "artwork",
+      "label": "Artwork override",
+      "info": "Uses the book product’s featured image if left empty."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72
+    }
+  ],
+  "presets": [
+    { "name": "Blockshelf — Book promo" }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

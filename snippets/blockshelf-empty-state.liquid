@@ -1,0 +1,33 @@
+{%- comment -%}
+  The Blockshelf — Empty state for main-collection
+
+  Shown when a collection returns zero products (e.g. after filtering).
+  Drop-in replacement for Harmony's stock empty-state markup.
+
+  Settings used:
+  - section.settings.empty_heading
+  - section.settings.empty_body
+  - section.settings.empty_cta_label
+  - section.settings.empty_cta_link (defaults to the linked book)
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.empty_heading | default: 'No matches.'
+  assign body = section.settings.empty_body | default: 'Nothing here fits the filter. FOMO into one of these instead.'
+  assign cta_label = section.settings.empty_cta_label | default: 'Shop the book'
+  assign cta_link = section.settings.empty_cta_link
+-%}
+
+<div class="bs-empty">
+  <div class="bs-empty__eyebrow">404 · no products</div>
+  <h2 class="bs-empty__heading">{{ heading | escape }}</h2>
+  <p class="bs-empty__body">{{ body }}</p>
+  {%- if cta_link != blank -%}
+    <a class="bs-empty__cta" href="{{ cta_link }}">
+      {{ cta_label | escape }}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      </svg>
+    </a>
+  {%- endif -%}
+</div>

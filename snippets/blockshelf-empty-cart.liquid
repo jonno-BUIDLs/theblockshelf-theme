@@ -1,0 +1,53 @@
+{%- comment -%}
+  blockshelf-empty-cart.liquid
+  ----------------------------
+  Brand-matching empty state shown inside the cart drawer and the /cart
+  page when cart.item_count == 0.
+
+  Accepts:
+  - context: 'drawer' | 'page'
+{%- endcomment -%}
+
+{%- liquid
+  assign ctx = context | default: 'page'
+  assign heading = 'Your cart is empty.'
+  assign body_copy = 'Nothing in the stack yet. FOMO into one of these instead.'
+  assign cta_label = 'Shop the collection'
+  assign cta_link = '/collections/all'
+-%}
+
+<div class="bs-empty-cart bs-empty-cart--{{ ctx }}">
+  <div class="bs-empty-cart__eyebrow">
+    <span class="bs-empty-cart__dot" aria-hidden="true"></span>
+    Cart · empty · 0 items
+  </div>
+
+  <h2 class="bs-empty-cart__heading">{{ heading }}</h2>
+  <p class="bs-empty-cart__body">{{ body_copy }}</p>
+
+  <div class="bs-empty-cart__ctas">
+    <a class="bs-empty-cart__cta bs-empty-cart__cta--primary" href="{{ cta_link }}">
+      {{ cta_label }}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      </svg>
+    </a>
+    <a class="bs-empty-cart__cta bs-empty-cart__cta--ghost" href="/products/bitcoin-minors">
+      Or stack the book
+    </a>
+  </div>
+
+  <div class="bs-empty-cart__marquee" aria-hidden="true">
+    <span>Minted on demand</span>
+    <span>·</span>
+    <span>Ships in 3 days</span>
+    <span>·</span>
+    <span>Sydney, AU</span>
+    <span>·</span>
+    <span>Minted on demand</span>
+    <span>·</span>
+    <span>Ships in 3 days</span>
+    <span>·</span>
+    <span>Sydney, AU</span>
+  </div>
+</div>

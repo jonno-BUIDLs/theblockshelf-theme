@@ -1,0 +1,83 @@
+{%- comment -%}
+  blockshelf-mini-faq.liquid
+  --------------------------
+  Short PDP-specific FAQ (3 questions). Lives below the collapsible details,
+  above "You may also like". Kept short on purpose — the full FAQ still lives
+  on dedicated pages.
+
+  Merchant-editable via three metafields (namespace: blockshelf.pdp_faq.*),
+  otherwise uses the defaults below.
+
+  Usage:
+    {% render 'blockshelf-mini-faq', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  comment
+    Allow per-product override via metafield, else fall back to brand defaults.
+  endcomment
+
+  assign q1_title = product.metafields.blockshelf.faq_q1_title  | default: 'Will these fit like regular sneakers?'
+  assign q1_body  = product.metafields.blockshelf.faq_q1_body   | default: 'Yep — true to size. If between sizes, size up half. Unisex sizing based on US men’s.'
+  assign q2_title = product.metafields.blockshelf.faq_q2_title  | default: 'How long until I get them?'
+  assign q2_body  = product.metafields.blockshelf.faq_q2_body   | default: 'Minted on demand — allow 3–5 business days for production, then standard shipping (2–7 days AU, 7–14 days international).'
+  assign q3_title = product.metafields.blockshelf.faq_q3_title  | default: 'Can I return them if they don’t fit?'
+  assign q3_body  = product.metafields.blockshelf.faq_q3_body   | default: '30-day returns on unworn items. Keep the box, keep the tags. We’ll refund or swap.'
+-%}
+
+<section class="bs-mini-faq">
+  <div class="bs-section-container">
+    <h2 class="bs-mini-faq__title">
+      Before you <em>buy</em>
+    </h2>
+
+    <div class="bs-details-stack">
+      <details class="bs-details-row" open>
+        <summary class="bs-details-summary">
+          <span>{{ q1_title }}</span>
+          <span class="bs-details-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="bs-details-body">{{ q1_body }}</div>
+      </details>
+      <details class="bs-details-row">
+        <summary class="bs-details-summary">
+          <span>{{ q2_title }}</span>
+          <span class="bs-details-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="bs-details-body">{{ q2_body }}</div>
+      </details>
+      <details class="bs-details-row">
+        <summary class="bs-details-summary">
+          <span>{{ q3_title }}</span>
+          <span class="bs-details-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="bs-details-body">{{ q3_body }}</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": {{ q1_title | json }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ q1_body | strip_html | json }} }
+    },
+    {
+      "@type": "Question",
+      "name": {{ q2_title | json }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ q2_body | strip_html | json }} }
+    },
+    {
+      "@type": "Question",
+      "name": {{ q3_title | json }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ q3_body | strip_html | json }} }
+    }
+  ]
+}
+</script>
+

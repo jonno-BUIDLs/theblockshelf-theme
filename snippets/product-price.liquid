@@ -1,18 +1,19 @@
 {%- comment -%}
-  Renders a list of product's price (regular, sale)
+  PATCHED — Renders a list of product's price (regular, sale)
+  The Blockshelf overlay: when the product is on sale AND the merchant
+  has not explicitly set `blockshelf_sale_style` to `none`, we render
+  the custom sale lockup via `blockshelf-sale-lockup`. Otherwise we fall
+  back to Harmony's original markup.
 
   Accepts:
   - product: {Object} Product Liquid object (optional)
   - variant: {Object} Variant Liquid object (optional)
   - placeholder: {Boolean} Renders a placeholder price (optional)
-  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
-  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+  - use_variant: {Boolean} Renders selected or first variant price (optional)
+  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags (optional)
   - hide_unit_price: if set to true, unit pricing are hidden (optional)
   - skip_to_price: if set to true, quantity price breaks configured are hidden (optional)
   - class: {String} Adds a price class to the price element (optional)
-
-  Usage:
-  {% render 'product-price', product: product %}
 {%- endcomment -%}
 {%- liquid
   if use_variant
@@ -30,55 +31,69 @@
   if compare_at_price > price
     assign on_sale = true
   endif
+
+  assign bs_sale_style = settings.blockshelf_sale_style | default: 'default'
+  assign use_bs_lockup = false
+  if on_sale and bs_sale_style != 'none'
+    assign use_bs_lockup = true
+  endif
 -%}
 
 <div class="price
   {%- if on_sale %} price--on-sale{% endif -%}
+  {%- if use_bs_lockup %} price--bs-lockup{% endif -%}
   {%- if class != blank %} {{ class }}{% endif -%}"
 >
   {%- if on_sale -%}
     <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
   {%- endif -%}
 
-  <span class="price__regular whitespace-nowrap">
-    {%- liquid
-      if product.quantity_price_breaks_configured? != true or skip_to_price
-        if target == product and product.price_varies
+  {%- if use_bs_lockup -%}
+    {%- render 'blockshelf-sale-lockup',
+          target: target,
+          price: price,
+          compare_at_price: compare_at_price -%}
+  {%- else -%}
+    <span class="price__regular whitespace-nowrap">
+      {%- liquid
+        if product.quantity_price_breaks_configured? != true or skip_to_price
+          if target == product and product.price_varies
+            if settings.currency_code_enabled
+              assign price_min = product.price_min | money_with_currency
+            else
+              assign price_min = product.price_min | money
+            endif
+            echo 'products.price.from_price_html' | t: price: price_min
+          else
+            if settings.currency_code_enabled
+              echo price | money_with_currency
+            else
+              echo price | money
+            endif
+          endif
+        else
           if settings.currency_code_enabled
             assign price_min = product.price_min | money_with_currency
           else
             assign price_min = product.price_min | money
           endif
           echo 'products.price.from_price_html' | t: price: price_min
-        else
-          if settings.currency_code_enabled
-            echo price | money_with_currency
-          else
-            echo price | money
-          endif
-        endif
-      else
-        if settings.currency_code_enabled
-          assign price_min = product.price_min | money_with_currency
-        else
-          assign price_min = product.price_min | money
-        endif
-        echo 'products.price.from_price_html' | t: price: price_min
-      endif
-    -%}
-  </span>
-
-  {%- if on_sale -%}
-    <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
-    <span class="price__sale inline-flex items-center h-auto relative">
-      {%- liquid
-        if settings.currency_code_enabled
-          echo compare_at_price | money_with_currency
-        else
-          echo compare_at_price | money
         endif
       -%}
     </span>
+
+    {%- if on_sale -%}
+      <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+      <span class="price__sale inline-flex items-center h-auto relative">
+        {%- liquid
+          if settings.currency_code_enabled
+            echo compare_at_price | money_with_currency
+          else
+            echo compare_at_price | money
+          endif
+        -%}
+      </span>
+    {%- endif -%}
   {%- endif -%}
 
   {%- unless hide_unit_price -%}

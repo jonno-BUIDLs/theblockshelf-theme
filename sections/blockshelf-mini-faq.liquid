@@ -1,0 +1,34 @@
+{%- comment -%}
+  Section wrapper around the mini-FAQ snippet so it can be placed and reordered
+  from the theme customizer.
+{%- endcomment -%}
+
+<div class="bs-section bs-section--mini-faq"
+     style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  {%- render 'blockshelf-mini-faq', product: product -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blockshelf — Mini FAQ",
+  "class": "shopify-section--bs-mini-faq",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48
+    }
+  ],
+  "presets": [
+    { "name": "Blockshelf — Mini FAQ" }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

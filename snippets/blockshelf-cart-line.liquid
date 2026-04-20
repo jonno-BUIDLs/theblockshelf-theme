@@ -1,0 +1,104 @@
+{%- comment -%}
+  blockshelf-cart-line.liquid
+  ---------------------------
+  Single line item for cart drawer AND main-cart page. Stripped layout:
+  thumb · title + variant · price (sale lockup) · remove.
+
+  Accepts:
+  - item: {LineItem}
+  - context: 'drawer' | 'page' — controls image size + title scale
+{%- endcomment -%}
+
+{%- liquid
+  assign ctx = context | default: 'drawer'
+  assign on_sale = false
+  if item.original_price > item.final_price or item.variant.compare_at_price > item.variant.price
+    assign on_sale = true
+  endif
+
+  if item.variant.compare_at_price > item.variant.price
+    assign was_price = item.variant.compare_at_price
+  else
+    assign was_price = item.original_price
+  endif
+  assign now_price = item.final_price
+
+  if on_sale and was_price > 0
+    assign save_percent = was_price | minus: now_price | times: 100.0 | divided_by: was_price | round
+  endif
+-%}
+
+<li class="bs-cart-line bs-cart-line--{{ ctx }}" data-bs-cart-line data-line-key="{{ item.key }}">
+  <a href="{{ item.url }}" class="bs-cart-line__thumb" tabindex="-1" aria-hidden="true">
+    {%- if item.image -%}
+      {{ item.image | image_url: width: 240 | image_tag:
+            loading: 'lazy',
+            widths: '120, 240',
+            sizes: '120px',
+            alt: item.product.title | escape }}
+    {%- else -%}
+      <span class="bs-cart-line__thumb-placeholder">No image</span>
+    {%- endif -%}
+  </a>
+
+  <div class="bs-cart-line__info">
+    <a href="{{ item.url }}" class="bs-cart-line__title">{{ item.product.title }}</a>
+
+    <div class="bs-cart-line__meta">
+      {%- unless item.product.has_only_default_variant -%}
+        <span class="bs-cart-line__variant">
+          {%- for opt in item.options_with_values -%}
+            {{ opt.value }}{%- unless forloop.last %} · {% endunless -%}
+          {%- endfor -%}
+        </span>
+      {%- endunless -%}
+
+      {%- if item.selling_plan_allocation -%}
+        <span class="bs-cart-line__plan">{{ item.selling_plan_allocation.selling_plan.name }}</span>
+      {%- endif -%}
+
+      <span class="bs-cart-line__qty-pill" aria-label="Quantity {{ item.quantity }}">
+        ×{{ item.quantity }}
+      </span>
+    </div>
+
+    {%- comment -%}On the page context, expose an inline qty stepper. Drawer context stays stripped.{%- endcomment -%}
+    {%- if ctx == 'page' -%}
+      <div class="bs-cart-line__qty-stepper" data-bs-qty-stepper>
+        <button type="button" class="bs-cart-line__qty-btn" data-bs-qty-decrement aria-label="Decrease quantity">−</button>
+        <input
+          type="number"
+          class="bs-cart-line__qty-input"
+          name="updates[{{ item.key }}]"
+          value="{{ item.quantity }}"
+          min="0"
+          aria-label="Quantity for {{ item.product.title | escape }}"
+          data-bs-qty-input
+        >
+        <button type="button" class="bs-cart-line__qty-btn" data-bs-qty-increment aria-label="Increase quantity">+</button>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="bs-cart-line__price-wrap">
+    <div class="bs-cart-line__price">
+      {%- if on_sale -%}
+        <span class="bs-cart-line__was">{{ was_price | money }}</span>
+        <span class="bs-cart-line__now bs-cart-line__now--sale">{{ now_price | money }}</span>
+        {%- if save_percent > 0 -%}
+          <span class="bs-cart-line__save">Save {{ save_percent }}%</span>
+        {%- endif -%}
+      {%- else -%}
+        <span class="bs-cart-line__now">{{ now_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    <button
+      type="button"
+      class="bs-cart-line__remove"
+      data-bs-cart-remove
+      data-line-key="{{ item.key }}"
+      aria-label="Remove {{ item.product.title | escape }}"
+    >×</button>
+  </div>
+</li>
