@@ -1790,3 +1790,15 @@ details[open] .bs-details-plus { transform: rotate(45deg); }
   .bs-sticky-buy { transition: none; }
   .bs-cart-bump  { animation: none; }
 }
+
+/* --- 14.15 Product-card scroll-reveal failsafe -------------------------
+   The theme's scroll-reveal sets product cards to opacity:0 / visibility:hidden
+   / translateY(50px) inline and relies on JS to reveal them. On the collection
+   grid that reveal never fires, leaving cards invisible (titles + prices present
+   in the DOM but hidden). Force them visible. We zero the motion via the custom
+   property (not the transform property) so hover-lift transforms still work. */
+.product-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  --motion-translateY: 0px !important;
+}

@@ -1,0 +1,334 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "text": "{{ product.vendor }}",
+            "text_size": "text-base"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-md",
+            "title_size_mobile": "product-title-md",
+            "show_price": true,
+            "show_rating": false
+          }
+        },
+        "description_teaser": {
+          "type": "description",
+          "settings": {
+            "text_size": "text-base"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_price": false,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "show_help_desk": true,
+            "help_label": "Need help?",
+            "help_type": "drawer",
+            "help_page": ""
+          }
+        },
+        "sticky_buy_button": {
+          "type": "sticky_buy_button",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "description_teaser",
+        "variant_picker",
+        "buy_buttons",
+        "pickup_availability",
+        "share",
+        "sticky_buy_button"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": 60,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "adapt_first",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "mobile_layout": "full_width",
+        "image_ratio_mobile": "adapt_first",
+        "mobile_thumbnail": false,
+        "padding_top": 24,
+        "padding_bottom": 60,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "help-drawer": {
+      "type": "help-drawer",
+      "blocks": {
+        "content-1": {
+          "type": "content",
+          "settings": {
+            "icon": "rocket",
+            "heading": "Shipping Information",
+            "text": "<p>Products are printed on demand, just for you, the moment you order. Like the Bitcoin blockchain, decentralized and trustless. Your goodies may arrive separately and take a few extra block confirmations to reach your doorstep. Estimated delivery: 5–10 business days after your order is placed.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#b45309",
+            "color_background": "#fffbeb",
+            "gradient_background": "",
+            "color_highlight": "#ffddbf",
+            "gradient_highlight": ""
+          }
+        },
+        "content-2": {
+          "type": "content",
+          "settings": {
+            "icon": "headphone",
+            "heading": "Customer Support",
+            "text": "<p>Need help with your order? We've got you. Reach out at info@theblockshelf.com and we'll get back to you within 24 hours on weekdays.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#0369a1",
+            "color_background": "#f0f9ff",
+            "gradient_background": "",
+            "color_highlight": "#ffddbf",
+            "gradient_highlight": ""
+          }
+        }
+      },
+      "block_order": [
+        "content-1",
+        "content-2"
+      ],
+      "settings": {
+        "heading": "Need help?",
+        "description": "<p>If you have any questions, you are always welcome to contact us. We'll get back to you as soon as possible, within 24 hours on weekdays.</p>"
+      }
+    },
+    "product-details": {
+      "type": "product-details",
+      "blocks": {
+        "collapsible_tab-format": {
+          "type": "collapsible_tab",
+          "settings": {
+            "icon": "none",
+            "heading": "Format",
+            "content": "<p>Hardcover picture book. Ages 3 to 8. Available in English (AU) and English (US) editions, pick yours at checkout.</p>",
+            "metafields": ""
+          }
+        },
+        "collapsible_tab-shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "icon": "none",
+            "heading": "Shipping & returns",
+            "content": "<p>Printed on demand and shipped from our Sydney studio. Allow 3 to 5 business days for printing, then standard post on top. 30-day returns on unopened, undamaged books.</p>",
+            "metafields": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab-format",
+        "collapsible_tab-shipping"
+      ],
+      "settings": {
+        "style": "with-border",
+        "open_first_row": true,
+        "specifications_heading": "",
+        "heading": "Details",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#fafafa",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "blockshelf-book-promo": {
+      "type": "blockshelf-book-promo",
+      "settings": {
+        "book_handle": "shoetoshi-nakamotoes",
+        "eyebrow": "Pairs with",
+        "heading_pre": "Shoetoshi",
+        "heading_accent": "Nakamotoes",
+        "body": "<p>The kicks the kids in the book all wear. Canvas Bitcoin shoes built to HODL, not to rug you after three wears. Your mini Maxi will rave about them at school.</p>",
+        "cta_label": "Shop the shoes",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "cta_link": "/products/shoetoshi-nakamotoes"
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "You may also like",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#fafafa",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "faq_book": {
+      "type": "faq",
+      "blocks": {
+        "q_age": {
+          "type": "question",
+          "settings": {
+            "title": "What age is this for?",
+            "text": "<p>Ages 3 to 8. Little ones love the pictures and fart joke names. Plenty of adults read it to themselves first. No judgement.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q_lang": {
+          "type": "question",
+          "settings": {
+            "title": "AU or US English?",
+            "text": "<p>Depends whether you love your mum or mom. Same story, same jokes, same crypto twitter distilled into a kids' book.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q_ship": {
+          "type": "question",
+          "settings": {
+            "title": "How long till it shows up?",
+            "text": "<p>Post is the one third-party I can't decentralise, so delivery timing isn't fully in my hands. But I keep some stock on hand and run print-on-demand globally, so I'll route your order the fastest way I can. Most go out within a few days.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q_what": {
+          "type": "question",
+          "settings": {
+            "title": "What actually turns up?",
+            "text": "<p>One physical hardcover book you can hodl, dog-ear and read at bedtime. Not a PDF, not an NFT, not a link to a Discord.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "q_age",
+        "q_lang",
+        "q_ship",
+        "q_what"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "Before you buy",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": false,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#fafafa",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#dc3fb1",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#dc3fb1",
+        "color_button_gradient": "",
+        "color_overlay": "#dc3fb1",
+        "overlay_opacity": 100,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "help-drawer",
+    "product-details",
+    "blockshelf-book-promo",
+    "faq_book",
+    "recently-viewed"
+  ]
+}
