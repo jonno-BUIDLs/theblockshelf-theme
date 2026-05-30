@@ -143,15 +143,6 @@
     "product-details": {
       "type": "product-details",
       "blocks": {
-        "collapsible_tab-1": {
-          "type": "collapsible_tab",
-          "settings": {
-            "icon": "none",
-            "heading": "Full description",
-            "content": "<p>Full product description goes here — uses the product's default description when left blank.</p>",
-            "metafields": ""
-          }
-        },
         "collapsible_tab-2": {
           "type": "collapsible_tab",
           "settings": {
@@ -181,7 +172,6 @@
         }
       },
       "block_order": [
-        "collapsible_tab-1",
         "collapsible_tab-2",
         "collapsible_tab-3",
         "collapsible_tab-4"
