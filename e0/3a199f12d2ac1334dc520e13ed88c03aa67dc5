@@ -1,0 +1,19 @@
+sections/mobile-dock.liquid
+  s_f4b159dc13e517::t_d129ee5e8602ef 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e03a199f12d2ac1334dc520e13ed88c03aa67dc5",
+  "prompts": {},
+  "sessions": {
+    "s_f4b159dc13e517": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cceb2fc9-51a0-406c-a2ac-77967803646c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Jonno <jonno.newman@protonmail.com>"
+    }
+  }
+}
