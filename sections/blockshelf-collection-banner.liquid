@@ -62,10 +62,10 @@
     <div class="bs-collection-banner__left">
       <div>
         {%- if section.settings.show_breadcrumb -%}
-          <nav class="bs-crumb" aria-label="{{ 'general.breadcrumb.title' | t | default: 'Breadcrumb' | escape }}">
-            <a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t | default: 'Home' }}</a>
+          <nav class="bs-crumb" aria-label="Breadcrumb">
+            <a href="{{ routes.root_url }}">Home</a>
             <span class="bs-crumb__sep">/</span>
-            <a href="{{ routes.collections_url | default: '/collections' }}">{{ 'general.breadcrumb.shop' | t | default: 'Shop' }}</a>
+            <a href="{{ routes.collections_url | default: '/collections' }}">Shop</a>
             <span class="bs-crumb__sep">/</span>
             <span class="bs-crumb__here">{{ coll_title | escape }}</span>
           </nav>
