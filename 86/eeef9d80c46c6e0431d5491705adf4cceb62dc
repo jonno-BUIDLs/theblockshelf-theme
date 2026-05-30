@@ -1,0 +1,22 @@
+assets/blockshelf-redesign.css
+  s_f4b159dc13e517::t_6bceeed9b81822 1793-1804
+templates/product.book.json
+  s_f4b159dc13e517::t_bb44631161adc4 111
+  s_f4b159dc13e517::t_1f9a8bef369ffe 1-110,112-334
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "86eeef9d80c46c6e0431d5491705adf4cceb62dc",
+  "prompts": {},
+  "sessions": {
+    "s_f4b159dc13e517": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cceb2fc9-51a0-406c-a2ac-77967803646c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Jonno <jonno.newman@protonmail.com>"
+    }
+  }
+}
