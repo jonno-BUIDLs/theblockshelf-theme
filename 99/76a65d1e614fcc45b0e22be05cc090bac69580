@@ -1,0 +1,22 @@
+sections/blockshelf-hero.liquid
+  s_f4b159dc13e517::t_9ecfc645f6fd5c 109
+  s_f4b159dc13e517::t_75a46466b98c46 116
+templates/index.json
+  s_f4b159dc13e517::t_b1fbcf7c8c4933 7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9976a65d1e614fcc45b0e22be05cc090bac69580",
+  "prompts": {},
+  "sessions": {
+    "s_f4b159dc13e517": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cceb2fc9-51a0-406c-a2ac-77967803646c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Jonno <jonno.newman@protonmail.com>"
+    }
+  }
+}
