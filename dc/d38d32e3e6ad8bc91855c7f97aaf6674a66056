@@ -1,0 +1,22 @@
+assets/blockshelf-redesign.css
+  s_df578e19ec0393::t_babcf42bfa159d 1840-1854
+sections/blockshelf-collection-banner.liquid
+  s_df578e19ec0393::t_614232f342d5aa 51-67
+  s_df578e19ec0393::t_14c2ce88b345e5 131,133-138,140,143,145-150,152,155,157-162,164
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "dcd38d32e3e6ad8bc91855c7f97aaf6674a66056",
+  "prompts": {},
+  "sessions": {
+    "s_df578e19ec0393": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9bd4a6c4-7472-4a6a-bcaa-aa22d84bac97",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Jonno <jonno.newman@protonmail.com>"
+    }
+  }
+}
