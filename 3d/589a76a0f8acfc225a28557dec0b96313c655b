@@ -1,0 +1,9 @@
+assets/blockshelf-redesign.css
+  ai_agent 1829-1834,1836-1838
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "3d589a76a0f8acfc225a28557dec0b96313c655b",
+  "prompts": {}
+}
