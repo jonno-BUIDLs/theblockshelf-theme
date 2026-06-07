@@ -1826,7 +1826,14 @@ details[open] .bs-details-plus { transform: rotate(45deg); }
 }
 .template-product .product__description,
 .template-product .product__description .rte,
-.template-product .product__description .rte * {
+.template-product .product__description .rte *,
+.template-product .product__text.rte,
+.featured-product .product__text.rte,
+.template-product .product__text.rte p,
+.featured-product .product__text.rte p {
+  font-family: var(--bs-font-body) !important;
   text-transform: none !important;
-  letter-spacing: normal;
+  letter-spacing: normal !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
 }
