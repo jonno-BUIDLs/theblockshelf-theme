@@ -1,0 +1,34 @@
+templates/collection.json
+  s_df578e19ec0393::t_dfa3d259509383 13
+templates/index.json
+  s_df578e19ec0393::t_dfa3d259509383 198,248,285-286,295,313,322
+sections/footer-group.json
+  s_df578e19ec0393::t_dfa3d259509383 1
+snippets/blockshelf-reassurance.liquid
+  s_df578e19ec0393::t_f1b84147052efc 18
+snippets/blockshelf-mini-faq.liquid
+  s_df578e19ec0393::t_f1b84147052efc 21,23-25
+templates/product.book.json
+  s_df578e19ec0393::t_dfa3d259509383 69,111,163
+templates/product.json
+  s_df578e19ec0393::t_61b41524db8f80 160
+  s_df578e19ec0393::t_dfa3d259509383 69,111,169
+assets/blockshelf-redesign.css
+  s_df578e19ec0393::t_2bd166a0ba2851 194,207,1805-1831
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "e5fefa35e382eefa142821858700a70dd9f72c2d",
+  "prompts": {},
+  "sessions": {
+    "s_df578e19ec0393": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9bd4a6c4-7472-4a6a-bcaa-aa22d84bac97",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Jonno <jonno.newman@protonmail.com>"
+    }
+  }
+}
