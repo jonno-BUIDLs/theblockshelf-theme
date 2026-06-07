@@ -18,11 +18,11 @@
   endcomment
 
   assign q1_title = product.metafields.blockshelf.faq_q1_title  | default: 'Will these fit like regular sneakers?'
-  assign q1_body  = product.metafields.blockshelf.faq_q1_body   | default: 'Yep — true to size. If between sizes, size up half. Unisex sizing based on US men’s.'
+  assign q1_body  = product.metafields.blockshelf.faq_q1_body   | default: 'Yep, true to size. If between sizes, size up half. Unisex sizing based on US men’s.'
   assign q2_title = product.metafields.blockshelf.faq_q2_title  | default: 'How long until I get them?'
-  assign q2_body  = product.metafields.blockshelf.faq_q2_body   | default: 'Minted on demand — allow 3–5 business days for production, then standard shipping (2–7 days AU, 7–14 days international).'
-  assign q3_title = product.metafields.blockshelf.faq_q3_title  | default: 'Can I return them if they don’t fit?'
-  assign q3_body  = product.metafields.blockshelf.faq_q3_body   | default: '30-day returns on unworn items. Keep the box, keep the tags. We’ll refund or swap.'
+  assign q2_body  = product.metafields.blockshelf.faq_q2_body   | default: 'Minted on demand and shipped within 5 business days. After that, delivery is in the hands of Aus Post. Shipping cost is calculated at checkout.'
+  assign q3_title = product.metafields.blockshelf.faq_q3_title  | default: 'Will the print actually last?'
+  assign q3_body  = product.metafields.blockshelf.faq_q3_body   | default: 'Think bitcoin, not sh*tcoin. Printed to HODL, not to fade after three washes.'
 -%}
 
 <section class="bs-mini-faq">

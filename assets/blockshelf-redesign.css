@@ -191,7 +191,7 @@ body[data-bs-fonts] .button {
 .bs-hero__eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--bs-font-mono);
-  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--bs-accent);
   margin-bottom: 28px;
 }
@@ -204,7 +204,7 @@ body[data-bs-fonts] .button {
   font-weight: 700;
   font-size: clamp(52px, 8.5vw, 124px);
   line-height: 0.92;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.005em;
   text-transform: uppercase;
   margin: 0;
 }
@@ -1801,4 +1801,32 @@ details[open] .bs-details-plus { transform: rotate(45deg); }
   opacity: 1 !important;
   visibility: visible !important;
   --motion-translateY: 0px !important;
+}
+
+
+/* ============================================================================
+   AUDIT FIXES 2026-06-07
+   - ATC button: force flat-orange, kill the leftover violet (--bs-accent2)
+     focus ring / base-theme rounded border that leaks on the live PDP.
+   - PDP description: stop the global uppercase transform from rendering the
+     long-form story copy in all-caps (readability).
+   ========================================================================== */
+.template-product .product-form__submit,
+.template-product button[name="add"],
+.template-product .btn--add-to-cart {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+.template-product .product-form__submit:focus-visible,
+.template-product button[name="add"]:focus-visible,
+.template-product .btn--add-to-cart:focus-visible {
+  outline: 2px solid var(--bs-text, #fff);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.template-product .product__description,
+.template-product .product__description .rte,
+.template-product .product__description .rte * {
+  text-transform: none !important;
+  letter-spacing: normal;
 }

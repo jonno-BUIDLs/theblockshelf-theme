@@ -66,7 +66,7 @@
         },
         "sticky_buy_button": {
           "type": "sticky_buy_button",
-          "disabled": true,
+          "disabled": false,
           "settings": {}
         }
       },
@@ -108,7 +108,7 @@
           "settings": {
             "icon": "rocket",
             "heading": "Shipping Information",
-            "text": "<p>Products are printed on demand, just for you, the moment you order. Like the Bitcoin blockchain—decentralized and trustless. Your goodies may arrive separately and take a few extra block confirmations to reach your doorstep. Estimated delivery: 5–10 business days after your order is placed.</p>",
+            "text": "<p>Minted on demand, just for you, the moment you order. Like the Bitcoin blockchain, decentralized and trustless, your goodies may arrive separately and take a few extra block confirmations to reach you. Shipped within 5 business days; after that, it's in the hands of Aus Post. Shipping cost is calculated at checkout.</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle",
             "color_text": "#b45309",
@@ -157,7 +157,7 @@
           "settings": {
             "icon": "none",
             "heading": "Size guide",
-            "content": "<p>Unisex sizing based on US men's. True to size — size up half a size if between sizes.</p>",
+            "content": "<p>Unisex sizing based on US men's. True to size, size up half a size if between sizes.</p>",
             "metafields": ""
           }
         },
@@ -166,7 +166,7 @@
           "settings": {
             "icon": "none",
             "heading": "Shipping & returns",
-            "content": "<p>Minted on demand — prints ship in 3–5 business days from our Sydney studio. Free AU shipping over AU$200. 30-day returns on unworn items.</p>",
+            "content": "<p>Minted on demand, just for you. Shipped within 5 business days; after that, delivery's in the hands of Aus Post. Ironic that we're at the mercy of a third-party intermediary. Amiright? Shipping cost is calculated at checkout. And if the intermediaries are slogging you too hard, drop RUGGEDBYSHIPPING at checkout and I'll cover the rest.</p>",
             "metafields": ""
           }
         }
