@@ -48,6 +48,23 @@
   assign tile_1 = section.settings.image_1
   assign tile_2 = section.settings.image_2
   assign tile_3 = section.settings.image_3
+
+  # Fallback: fill any empty tile from the collection's product images
+  # (flattened across products). Tiles with no image are hidden rather
+  # than rendering an "IMG N" placeholder on the live page.
+  assign gallery = '' | split: ''
+  for banner_product in collection.products limit: 8
+    assign gallery = gallery | concat: banner_product.images
+  endfor
+  if tile_1 == blank
+    assign tile_1 = gallery[0]
+  endif
+  if tile_2 == blank
+    assign tile_2 = gallery[1]
+  endif
+  if tile_3 == blank
+    assign tile_3 = gallery[2]
+  endif
 -%}
 
 <section class="bs-collection-banner"
@@ -111,67 +128,40 @@
 
       <div class="bs-collage" aria-hidden="true">
         {%- comment -%} Tile 1 — tall left {%- endcomment -%}
+        {%- if tile_1 != blank -%}
         <div class="bs-collage__tile bs-collage__tile--1">
-          {%- if tile_1 != blank -%}
-            {{ tile_1 | image_url: width: 800 | image_tag:
-              loading: 'eager',
-              widths: '400,600,800,1000',
-              sizes: '(min-width: 900px) 25vw, 50vw',
-              alt: tile_1.alt | default: coll_title | escape
-            }}
-          {%- elsif collection.products[0].featured_media -%}
-            {{ collection.products[0].featured_media | image_url: width: 800 | image_tag:
-              loading: 'eager',
-              widths: '400,600,800,1000',
-              sizes: '(min-width: 900px) 25vw, 50vw',
-              alt: collection.products[0].title | escape
-            }}
-          {%- else -%}
-            <span class="bs-collage__holder">IMG 1 · 1:2</span>
-          {%- endif -%}
+          {{ tile_1 | image_url: width: 800 | image_tag:
+            loading: 'eager',
+            widths: '400,600,800,1000',
+            sizes: '(min-width: 900px) 25vw, 50vw',
+            alt: tile_1.alt | default: coll_title | escape
+          }}
         </div>
+        {%- endif -%}
 
         {%- comment -%} Tile 2 — top right {%- endcomment -%}
+        {%- if tile_2 != blank -%}
         <div class="bs-collage__tile bs-collage__tile--2">
-          {%- if tile_2 != blank -%}
-            {{ tile_2 | image_url: width: 600 | image_tag:
-              loading: 'eager',
-              widths: '300,450,600,900',
-              sizes: '(min-width: 900px) 18vw, 50vw',
-              alt: tile_2.alt | default: coll_title | escape
-            }}
-          {%- elsif collection.products[1].featured_media -%}
-            {{ collection.products[1].featured_media | image_url: width: 600 | image_tag:
-              loading: 'lazy',
-              widths: '300,450,600,900',
-              sizes: '(min-width: 900px) 18vw, 50vw',
-              alt: collection.products[1].title | escape
-            }}
-          {%- else -%}
-            <span class="bs-collage__holder">IMG 2 · 1:1</span>
-          {%- endif -%}
+          {{ tile_2 | image_url: width: 600 | image_tag:
+            loading: 'lazy',
+            widths: '300,450,600,900',
+            sizes: '(min-width: 900px) 18vw, 50vw',
+            alt: tile_2.alt | default: coll_title | escape
+          }}
         </div>
+        {%- endif -%}
 
         {%- comment -%} Tile 3 — bottom right {%- endcomment -%}
+        {%- if tile_3 != blank -%}
         <div class="bs-collage__tile bs-collage__tile--3">
-          {%- if tile_3 != blank -%}
-            {{ tile_3 | image_url: width: 600 | image_tag:
-              loading: 'lazy',
-              widths: '300,450,600,900',
-              sizes: '(min-width: 900px) 18vw, 50vw',
-              alt: tile_3.alt | default: coll_title | escape
-            }}
-          {%- elsif collection.products[2].featured_media -%}
-            {{ collection.products[2].featured_media | image_url: width: 600 | image_tag:
-              loading: 'lazy',
-              widths: '300,450,600,900',
-              sizes: '(min-width: 900px) 18vw, 50vw',
-              alt: collection.products[2].title | escape
-            }}
-          {%- else -%}
-            <span class="bs-collage__holder">IMG 3 · 1:1</span>
-          {%- endif -%}
+          {{ tile_3 | image_url: width: 600 | image_tag:
+            loading: 'lazy',
+            widths: '300,450,600,900',
+            sizes: '(min-width: 900px) 18vw, 50vw',
+            alt: tile_3.alt | default: coll_title | escape
+          }}
         </div>
+        {%- endif -%}
       </div>
     </div>
   </div>

@@ -1837,3 +1837,18 @@ details[open] .bs-details-plus { transform: rotate(45deg); }
   font-size: 15px !important;
   line-height: 1.6 !important;
 }
+
+
+/* AUDIT FIX 2026-06-07b: remove Harmony's .button::after ring (pink
+   --color-button-border / 60px radius) from the PDP buy buttons. It clashed
+   with the flat-orange ATC as a leftover pink pill outline. Scoped to the
+   product buy buttons so other .button rings elsewhere are untouched. */
+.template-product .product-form__submit::after,
+.template-product .product-form__buttons .button::after,
+.template-product .buy-buttons .button::after,
+.template-product .product-sticky-form__variant .button::after,
+.template-product button[name="add"]::after {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+}
