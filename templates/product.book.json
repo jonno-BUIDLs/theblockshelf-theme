@@ -200,51 +200,6 @@
         "rounded": false
       }
     },
-    "blockshelf-book-promo": {
-      "type": "blockshelf-book-promo",
-      "settings": {
-        "book_handle": "shoetoshi-nakamotoes",
-        "eyebrow": "Pairs with",
-        "heading_pre": "Shoetoshi",
-        "heading_accent": "Nakamotoes",
-        "body": "<p>The kicks the kids in the book all wear. Canvas Bitcoin shoes built to HODL, not to rug you after three wears. Your mini Maxi will rave about them at school.</p>",
-        "cta_label": "Shop the shoes",
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "cta_link": "/products/shoetoshi-nakamotoes"
-      }
-    },
-    "recently-viewed": {
-      "type": "recently-viewed",
-      "settings": {
-        "product_limit": 6,
-        "columns": 4,
-        "carousel_on_desktop": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "You may also like",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "#fafafa",
-        "color_background": "#000000",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 40,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
     "faq_book": {
       "type": "faq",
       "blocks": {
@@ -327,8 +282,6 @@
     "main-product",
     "help-drawer",
     "product-details",
-    "blockshelf-book-promo",
-    "faq_book",
-    "recently-viewed"
+    "faq_book"
   ]
 }

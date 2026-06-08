@@ -134,7 +134,10 @@
           }
         }
       },
-      "block_order": ["content-1", "content-2"],
+      "block_order": [
+        "content-1",
+        "content-2"
+      ],
       "settings": {
         "heading": "Need help?",
         "description": "<p>If you have any questions, you are always welcome to contact us. We'll get back to you as soon as possible, within 24 hours on weekdays.</p>"
@@ -210,7 +213,7 @@
     "blockshelf-book-promo": {
       "type": "blockshelf-book-promo",
       "settings": {
-        "book_handle": "bitcoin-minors",
+        "book_handle": "bitcoin-minors-and-degen-descendants",
         "eyebrow": "Pairs with",
         "heading_pre": "Bitcoin",
         "heading_accent": "Minors",
@@ -226,37 +229,6 @@
         "padding_top": 40,
         "padding_bottom": 56
       }
-    },
-    "recently-viewed": {
-      "type": "recently-viewed",
-      "settings": {
-        "product_limit": 6,
-        "columns": 4,
-        "carousel_on_desktop": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "You may also like",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "#fafafa",
-        "color_background": "#000000",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 40,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
     }
   },
   "order": [
@@ -264,7 +236,6 @@
     "help-drawer",
     "product-details",
     "blockshelf-book-promo",
-    "blockshelf-mini-faq",
-    "recently-viewed"
+    "blockshelf-mini-faq"
   ]
 }
