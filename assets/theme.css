@@ -11827,41 +11827,22 @@ noscript .product-form__input {
   margin-block-start: var(--sp-1d5);
 }
 
+/* Blockshelf fix (2026-07-12): stack the price directly below the product
+   title in a single full-width column. The previous 2-column lockup
+   (grid-template-columns: auto auto at >=1280px) let a long title consume the
+   whole row and push the price column off the right edge of the viewport,
+   hiding the price entirely on the book's homepage feature and PDP. */
 .product__title.with-price {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: flex-end;
-  justify-content: space-between;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
 }
 
 .product__title .product__price {
-  align-self: flex-end;
+  align-self: start;
 }
 
 .product__title.with-price .product__rating {
-  place-self: end;
-}
-
-@media screen and (min-width: 1280px) {
-  .product__title.with-price {
-    grid-template-columns: auto auto;
-  }
-
-  .product__title.with-price h1 {
-    grid-column: auto;
-  }
-
-  .product__title.with-price .price__sale {
-    place-self: end;
-  }
-
-  .product__title .product__price {
-    place-self: end;
-  }
-
-  .product__title.with-price .product__rating {
-    grid-column: 1/-1;
-    place-self: auto;
-  }
+  place-self: start;
 }
 
 .product-form-wrapper {
