@@ -1,0 +1,19 @@
+assets/theme.css
+  s_4476b2ad8bd745::t_ef8c48fae1c087 11830-11834,11836-11837,11841,11845
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "8662d27f61aaea8e31b736490ad4f6e924b86e53",
+  "prompts": {},
+  "sessions": {
+    "s_4476b2ad8bd745": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d379f4a7-8530-473f-9342-3b0a45ccdfd3",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Jonno <jonno.newman@protonmail.com>"
+    }
+  }
+}
