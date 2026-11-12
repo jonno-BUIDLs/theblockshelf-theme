@@ -235,6 +235,12 @@
           if (cart.item_count > 0) el.classList.add('has-items');
           else el.classList.remove('has-items');
         });
+        // Harmony's header/dock badge. It normally updates from the
+        // product-form's cartUpdate event, which we now stop (see below).
+        $$('cart-count').forEach(function (el) {
+          el.textContent = cart.item_count;
+          el.hidden = cart.item_count === 0;
+        });
       }).catch(function () {});
     }
   };
@@ -254,6 +260,10 @@
       if (form.hasAttribute('data-no-ajax')) return;
 
       e.preventDefault();
+      // Harmony's <product-form> also listens for submit and posts to
+      // /cart/add itself. We run first (capture on document), so stop the
+      // event here or every click adds the item twice.
+      e.stopPropagation();
 
       var submit = form.querySelector('[type="submit"]');
       if (submit) submit.setAttribute('disabled', '');
