@@ -3,7 +3,7 @@
     "blockshelf_hero": {
       "type": "blockshelf-hero",
       "settings": {
-        "eyebrow": "SS26 · STACK SATS. WEAR THE HAT.",
+        "eyebrow": "",
         "heading": "A kids' book that slaps, and Bitcoin merch that won't rug you.",
         "accent_word": "Bitcoin",
         "kicker": "Bitcoin-native merch for degens who don't do fast fashion rugs. Clean drip, a kids book that slaps, and shoes that HODL.",
@@ -48,7 +48,9 @@
         },
         "description": {
           "type": "description",
-          "settings": { "text_size": "text-sm" }
+          "settings": {
+            "text_size": "text-sm"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -80,12 +82,23 @@
         },
         "spinning_text": {
           "type": "spinning_text",
-          "settings": { "text": "Featured drop" }
+          "settings": {
+            "text": "Featured drop"
+          }
         }
       },
-      "block_order": ["text","title","buy_buttons_dfNiM6","description","variant_picker","inventory","share","spinning_text"],
+      "block_order": [
+        "text",
+        "title",
+        "buy_buttons_dfNiM6",
+        "description",
+        "variant_picker",
+        "inventory",
+        "share",
+        "spinning_text"
+      ],
       "settings": {
-        "product": "bitcoin-minors-and-degen-descendants",
+        "product": "bitcoin-explainabull",
         "enable_sticky_info": true,
         "media_size": 64,
         "gallery_layout": "thumbnail",
@@ -135,9 +148,8 @@
         "collection-4": {
           "type": "collection",
           "settings": {
-            "collection": "bitcoin-minors-and-degen-descendants",
-            "image": "shopify://shop_images/20250318_104936.jpg",
-            "title": "Bitcoin Minors and Degen Descendants",
+            "collection": "books",
+            "title": "Books",
             "description": "",
             "overlay_content": false,
             "color_text": "#ffffff",
@@ -146,7 +158,11 @@
           }
         }
       },
-      "block_order": ["collection-2","collection-3","collection-4"],
+      "block_order": [
+        "collection-2",
+        "collection-3",
+        "collection-4"
+      ],
       "settings": {
         "columns": 3,
         "carousel_on_desktop": false,
@@ -205,7 +221,10 @@
           }
         }
       },
-      "block_order": ["heading_qeTmJK","text_kWtXbQ"],
+      "block_order": [
+        "heading_qeTmJK",
+        "text_kWtXbQ"
+      ],
       "settings": {
         "image": "shopify://shop_images/GM_mascot_2.png",
         "image_ratio": "landscape",
@@ -254,9 +273,16 @@
             "highlighted_scribble": "circle"
           }
         },
-        "form_4DJjEL": { "type": "form", "settings": {} }
+        "form_4DJjEL": {
+          "type": "form",
+          "settings": {}
+        }
       },
-      "block_order": ["heading_pTfExM","text_44niw3","form_4DJjEL"],
+      "block_order": [
+        "heading_pTfExM",
+        "text_44niw3",
+        "form_4DJjEL"
+      ],
       "settings": {
         "content_width": "medium",
         "text_alignment": "left",
@@ -327,7 +353,13 @@
           }
         }
       },
-      "block_order": ["question_nWGGNG","question_HxPzkp","question_e4MncW","question_jcRpjV","contact_7bAYEz"],
+      "block_order": [
+        "question_nWGGNG",
+        "question_HxPzkp",
+        "question_e4MncW",
+        "question_jcRpjV",
+        "contact_7bAYEz"
+      ],
       "settings": {
         "style": "with-border",
         "heading": "FAQs",

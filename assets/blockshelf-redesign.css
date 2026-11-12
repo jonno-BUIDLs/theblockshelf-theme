@@ -1211,6 +1211,16 @@ body.template-product { background: var(--bs-bg); color: var(--bs-text); }
   color: var(--bs-text);
   margin: 0 0 16px;
 }
+/* The PDP reuses .featured-product, whose 5.5vw title (section 3) is sized
+   for the wide homepage column. In the narrower PDP info column a long
+   single word ("EXPLAINABULL") ran off the right edge, so size it down
+   here and let it wrap as a last resort. */
+@media (min-width: 768px) {
+  .template-product .featured-product .product__info h1 {
+    font-size: clamp(36px, 4.2vw, 62px);
+    overflow-wrap: anywhere;
+  }
+}
 
 .template-product .product__vendor {
   font-family: var(--bs-font-mono);
