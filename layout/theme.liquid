@@ -61,6 +61,35 @@
     endif
   -%}
 
+  {%- comment -%}
+    BLOCKSHELF — HOMEBAR/UI POLISH PASS (requested edit, round 11)
+    Round 11: .bs-collection-banner__inner's border-radius matched to
+    var(--card-radius), the same theme-wide token every product card uses,
+    instead of its own smaller hardcoded 4px. Keep any future edits to
+    this pass here.
+  {%- endcomment -%}
+  <style>
+  [id$="__collection-list"] .tracking-heading{letter-spacing:normal !important}
+  [id$="__images_with_text_M8eG6c"] .media{background:transparent !important}
+  .bs-hero__mascot{background:transparent !important;border:0 !important}
+  body{background-color:var(--bs-bg,#000000) !important;background-image:radial-gradient(ellipse 60% 50% at 85% 30%,rgba(var(--bs-accent2-rgb),0.22),transparent 60%),radial-gradient(ellipse 45% 40% at 10% 90%,rgba(var(--bs-accent-rgb),0.08),transparent 60%),linear-gradient(rgba(var(--bs-accent2-rgb),0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--bs-accent2-rgb),0.05) 1px,transparent 1px) !important;background-size:auto,auto,80px 80px,80px 80px !important;background-repeat:no-repeat,no-repeat,repeat,repeat !important;background-attachment:fixed,fixed,fixed,fixed !important}
+  .bs-collection-banner{background:transparent !important}
+  .bs-collection-banner__inner{background:var(--bs-surface,#0a0a0a) !important;border-radius:var(--card-radius) !important}
+  .bs-collection-banner__right{background:var(--bs-surface,#0a0a0a) !important}
+  .bs-hero{background:transparent !important}
+  .bs-hero::before,.bs-hero::after{display:none !important}
+  .faq,.footer,.faq::before,.footer::before{background:transparent !important}
+  #PageContainer{background:transparent !important}
+  .section{background:transparent !important}
+  .section::before{background:transparent !important}
+  .shopify-section--product-details,.template-product .product-details,.template-product .accordion,.bs-mini-faq{background:transparent !important}
+  .header{border-bottom:0 !important}
+  /* Sticky header: the .section rule above also strips the header's own
+     background, so once the page has scrolled the menu bar was see-through
+     over the content. Give it a solid background while it's stuck. */
+  .header-section.header-scrolled .header{background:var(--bs-bg,#000000) !important;border-bottom:1px solid var(--bs-border,rgba(255,255,255,.08)) !important}
+  </style>
+
   <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
 
   {{ content_for_header }}

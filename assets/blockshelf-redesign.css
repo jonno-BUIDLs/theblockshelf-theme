@@ -801,6 +801,7 @@ body[data-bs-sale-style="neon"] .bs-sale-badge::before {
   top: 30px;
   right: 30px;
   z-index: 3;
+  pointer-events: none; /* sits over a collage tile link; let clicks through */
   font-family: 'Clash Display', sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -1211,13 +1212,14 @@ body.template-product { background: var(--bs-bg); color: var(--bs-text); }
   color: var(--bs-text);
   margin: 0 0 16px;
 }
-/* The PDP reuses .featured-product, whose 5.5vw title (section 3) is sized
-   for the wide homepage column. In the narrower PDP info column a long
-   single word ("EXPLAINABULL") ran off the right edge, so size it down
-   here and let it wrap as a last resort. */
+/* The 5.5vw .featured-product title (section 3) is too big for the product
+   info column on both the PDP and the homepage feature: a long single word
+   ("EXPLAINABULL") ran off the right edge. Size it to the column and let it
+   wrap as a last resort. */
 @media (min-width: 768px) {
-  .template-product .featured-product .product__info h1 {
-    font-size: clamp(36px, 4.2vw, 62px);
+  .featured-product .product__info h1,
+  .featured-product .product__info h2 {
+    font-size: clamp(32px, 3.8vw, 58px);
     overflow-wrap: anywhere;
   }
 }
